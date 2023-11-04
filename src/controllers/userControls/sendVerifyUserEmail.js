@@ -10,6 +10,7 @@ module.exports = async (req, res, next) => {
   const user = await User.findOne({ email: email });
 
   if (user) {
+    // const currentUrl = "http://localhost:3000/verify";
     const currentUrl = "http://Transecureescrow.vercel.app/verify";
     const uniqueString = uuidv4();
     const url = `${currentUrl}/${user._id}/${uniqueString}`;

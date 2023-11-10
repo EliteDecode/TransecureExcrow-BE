@@ -31,17 +31,6 @@ module.exports = async function (req, res, next) {
       Address,
     } = req.body;
 
-    const data = {
-      firstName: Firstname,
-      lastName: Lastname,
-      phone: PrimaryPhone,
-      altPhone: AlternatePhone,
-      gender: Gender,
-      billingAddress: Address,
-      bankAccount: BankAccount,
-      bankName: BankName,
-    };
-
     console.log(data);
 
     const userFound = await User.findById(req.params.id);
@@ -49,14 +38,14 @@ module.exports = async function (req, res, next) {
       const updated = await User.findByIdAndUpdate(
         req.params.id,
         {
-          firstName: Firstname,
-          lastName: Lastname,
-          phone: PrimaryPhone,
-          altPhone: AlternatePhone,
-          gender: Gender,
-          billingAddress: Address,
-          bankAccount: BankAccount,
-          bankName: BankName,
+          firstName: Firstname || userFound.firstName,
+          lastName: Lastname || userFound.lastName,
+          phone: PrimaryPhone || userFound.phone,
+          altPhone: AlternatePhone || userFound.altPhone,
+          gender: Gender || userFound.gender,
+          billingAddress: Address || userFound.billingAddress,
+          bankAccount: BankAccount || userFound.bankAccount,
+          bankName: BankName || userFound.bankName,
         },
         {
           new: true,

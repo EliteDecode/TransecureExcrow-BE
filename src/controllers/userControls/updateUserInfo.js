@@ -46,7 +46,7 @@ module.exports = async function (req, res, next) {
 
     const userFound = await User.findById(req.params.id);
     if (userFound) {
-      const updatedUser = await User.findByIdAndUpdate(
+      const updated = await User.findByIdAndUpdate(
         req.params.id,
         {
           firstName: Firstname,
@@ -62,7 +62,8 @@ module.exports = async function (req, res, next) {
           new: true,
         }
       );
-      if (updatedUser) {
+      if (updated) {
+        const updatedUser = await User.findById(req.params.id);
         const token = jwt.sign(
           { _id: updatedUser._id },
           constants.AGENT_TOKEN_SECRET,

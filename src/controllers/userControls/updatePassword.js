@@ -6,49 +6,35 @@ const jwt = require("jsonwebtoken");
 const constants = require("../../configs/constants");
 const referralCodeGenerator = require("referral-code-generator");
 
-const Schema = Joi.object({
-  oldPassword: Joi.string().required(),
-  newPassword: Joi.string().required(),
-  confirmPassword: Joi.string().required(),
-});
-
 module.exports = async function (req, res, next) {
   try {
     const _id = req.params.id;
-    const { error, value } = Schema.validate(req.body);
-    console.log(_id + value.oldPassword);
-    const userFound = await User.findById(req.params.id).select('password');
+    const userFound = await User.findById(req.params.id).select("password");
 
-    if (error) {
+    const { password, oldPassword } = req.body;
+
+    console.log(req.body);
+
+    if (!password || !oldPassword) {
       return res.status(400).json({
-        error: { message: error.details[0].message },
+        message: "All fields are compulsory",
       });
     }
-
-    if (value.newPassword !== value.confirmPassword) {
-      return res.status(400).json({
-        error: { message: "Password and Confirm Password Field must match " },
-      });
-    }
-
 
     if (userFound) {
-    console.log(userFound.password);
-    const isPassword = await bcrypt.compare(value.oldPassword, userFound.password);
+      const isPassword = await bcrypt.compare(oldPassword, userFound.password);
 
-    if (!isPassword) {
+      if (!isPassword) {
         return res.status(400).json({
           error: { message: "Old Password is incorrect!" },
         });
+      }
+
+      const pwd = await bcrypt.hash(password, 12);
+
+      const user = await User.findOneAndUpdate({ _id }, { password: pwd });
+      return res.status(200).json({ status: "success", user });
     }
-
-    value.newPassword = await bcrypt.hash(value.newPassword, 12);
-
-    const user = await User.findOneAndUpdate({ _id }, { password: value.newPassword}); 
-    return res.status(200).json({ status: "success", user });
-      
-  }
-
   } catch (error) {
     next(error);
   }

@@ -38,9 +38,9 @@ router.patch("/agent/:id", updateAgentProfile);
 router.put("/:id", userIsAuthenticated, updateUserDetails);
 router.put("/user/:id", userIsAuthenticated, updateUserInfo);
 router.post("/reset-password", resetPassword);
-router.put("/create-password/:email/:tkn", createNewPassword);
+// router.put("/create-password", createNewPassword);
 router.put("/role/:id", updateRole);
-router.patch("/password/:id", updatePassword);
+router.put("/create-password/:id", userIsAuthenticated, updatePassword);
 router.delete("/domain/:domain", verifyTokenForAdmin, deleteUsersByOrg);
 
 module.exports = router;

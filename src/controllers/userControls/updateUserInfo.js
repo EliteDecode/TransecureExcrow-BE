@@ -31,8 +31,6 @@ module.exports = async function (req, res, next) {
       Address,
     } = req.body;
 
-    console.log(data);
-
     const userFound = await User.findById(req.params.id);
     if (userFound) {
       const updated = await User.findByIdAndUpdate(

@@ -4,17 +4,17 @@ const UserToken = require("../Models/tokenModel");
 
 const sendMail = async function (email, subject, text) {
   const transporter = nodemailer.createTransport({
-    host: "koursemate.com",
+    host: "premium283.web-hosting.com",
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-      user: "info@koursemate.com", // your cPanel email address
-      pass: "tZp)Il5j,)Uw", // your cPanel email password
+      user: "testing@purplebeetech.com", // your cPanel email address
+      pass: "In[d$I~R-;2}", // your cPanel email password
     },
   });
 
   await transporter.sendMail({
-    from: "info@koursemate.com",
+    from: "testing@purplebeetech.com",
     to: email,
     subject: subject,
     html: text,

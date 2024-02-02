@@ -14,7 +14,7 @@ const sendMail = async function (email, subject, text) {
   });
 
   await transporter.sendMail({
-    from: "testing@purplebeetech.com",
+    from: "info@transecureescrow.com",
     to: email,
     subject: subject,
     html: text,

@@ -28,6 +28,8 @@ module.exports = async function (req, res, next) {
   try {
     const { error, value } = Schema.validate(req.body);
 
+    console.log(value);
+
     if (error) {
       return res.status(400).json({
         error: { message: error.details[0].message },

@@ -43,7 +43,7 @@ module.exports = async function (req, res, next) {
           <p style="font-weight: bold;">New Password:</p>
           <p>${pwd}</p>
           <p style="font-weight: bold;">Note:</p>
-          <p>Please keep your password safe at all times.</p>
+          <p>Please login to your account and pick a prefered password.</p>
        </div>`
       )
         .then(async () => {

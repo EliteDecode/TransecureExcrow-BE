@@ -52,6 +52,7 @@ app.use("/api/v1/auth", require("./api-routes/auths"));
 app.use("/api/v1/admin", require("./api-routes/admin"));
 app.use("/api/v1/products", require("./api-routes/products"));
 app.use("/api/v1/users", require("./api-routes/users"));
+app.use("/api/v1/message", require("./api-routes/message-route"));
 app.use("/api/v1/support", require("./api-routes/support"));
 app.use("/api/v1/referrals", require("./api-routes/referrals"));
 app.use("/api/v1/transactions", require("./api-routes/transactions"));

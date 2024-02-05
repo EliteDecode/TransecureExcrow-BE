@@ -21,6 +21,25 @@ const sendMail = async function (email, subject, text) {
   });
 };
 
+const sendMailMessage = async function (email, subject, text) {
+  const transporter = nodemailer.createTransport({
+    host: "premium283.web-hosting.com",
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: "testing@purplebeetech.com", // your cPanel email address
+      pass: "In[d$I~R-;2}", // your cPanel email password
+    },
+  });
+
+  await transporter.sendMail({
+    from: "testing@purplebeetech.com",
+    to: "transecureescrow1@gmail.com",
+    subject: subject,
+    html: text,
+  });
+};
+
 const deleteUserTokenIfDelayed = async (req, res) => {
   const cutoff = new Date(Date.now() - 5 * 60 * 1000);
   await UserToken.deleteMany({
@@ -28,4 +47,4 @@ const deleteUserTokenIfDelayed = async (req, res) => {
   });
 };
 
-module.exports = { sendMail, deleteUserTokenIfDelayed };
+module.exports = { sendMail, deleteUserTokenIfDelayed, sendMailMessage };

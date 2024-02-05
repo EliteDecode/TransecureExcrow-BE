@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const { sendMail } = require("../../utils/utils");
+const { sendMail, sendMailMessage } = require("../../utils/utils");
 
 const sendMessageToAdmin = asyncHandler(async (req, res) => {
   const { email, title, message, fullName } = req.body;
@@ -8,7 +8,7 @@ const sendMessageToAdmin = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("All fields are required");
   } else {
-    await sendMail(
+    await sendMailMessage(
       email,
       title,
       `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">

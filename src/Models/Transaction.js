@@ -52,6 +52,9 @@ const TransactionSchema = new Schema(
       enum: ["buyer", "seller"],
       default: "buyer",
     },
+    senderPayRef: {
+      type: String,
+    },
     beneficiaryEmail: {
       type: String,
       lowercase: true,
@@ -65,6 +68,9 @@ const TransactionSchema = new Schema(
       type: String,
       enum: ["buyer", "seller"],
       default: "seller",
+    },
+    beneficiaryPayRef: {
+      type: String,
     },
     senderStatus: {
       type: String,

@@ -47,6 +47,11 @@ const TransactionSchema = new Schema(
       lowercase: true,
       required: true,
     },
+    senderPhone: {
+      type: Number,
+      required: true,
+      default: "",
+    },
     senderRole: {
       type: String,
       enum: ["buyer", "seller"],
@@ -54,6 +59,7 @@ const TransactionSchema = new Schema(
     },
     senderPayRef: {
       type: String,
+      default: "",
     },
     beneficiaryEmail: {
       type: String,
@@ -63,6 +69,7 @@ const TransactionSchema = new Schema(
     beneficiaryPhone: {
       type: Number,
       required: true,
+      default: "",
     },
     beneficiaryRole: {
       type: String,
@@ -71,6 +78,7 @@ const TransactionSchema = new Schema(
     },
     beneficiaryPayRef: {
       type: String,
+      default: "",
     },
     senderStatus: {
       type: String,

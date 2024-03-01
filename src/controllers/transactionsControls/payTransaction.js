@@ -11,6 +11,8 @@ const referralCodeGenerator = require("referral-code-generator");
 const Schema = Joi.object({
   beneficiaryStatus: Joi.string().required(),
   senderStatus: Joi.string().required(),
+  beneficiaryPayRef: Joi.string().required(),
+  senderPayRef: Joi.string().required(),
   // email: Joi.string().email().required(),
 });
 
@@ -43,6 +45,7 @@ module.exports = async function (req, res, next) {
         { tid: tid },
         {
           beneficiaryStatus: value.beneficiaryStatus,
+          beneficiaryPayRef: value.beneficiaryPayRef,
           action: "sender",
           tstage: "3",
         },
@@ -56,6 +59,7 @@ module.exports = async function (req, res, next) {
         { tid: tid },
         {
           beneficiaryStatus: value.beneficiaryStatus,
+          beneficiaryPayRef: value.beneficiaryPayRef,
           action: "sender",
           tstage: "2",
         },
@@ -69,6 +73,7 @@ module.exports = async function (req, res, next) {
         { tid: tid },
         {
           beneficiaryStatus: value.beneficiaryStatus,
+          beneficiaryPayRef: value.beneficiaryPayRef,
           action: "beneficiary",
           tstage: "3",
         },
@@ -82,6 +87,7 @@ module.exports = async function (req, res, next) {
         { tid: tid },
         {
           beneficiaryStatus: value.beneficiaryStatus,
+          beneficiaryPayRef: value.beneficiaryPayRef,
           action: "beneficiary",
           tstage: "2",
         },
@@ -96,6 +102,7 @@ module.exports = async function (req, res, next) {
         { tid: tid },
         {
           senderStatus: value.senderStatus,
+          senderPayRef: value.senderPayRef,
           action: "beneficiary",
           tstage: "3",
         },
@@ -110,6 +117,7 @@ module.exports = async function (req, res, next) {
         { tid: tid },
         {
           senderStatus: value.senderStatus,
+          senderPayRef: value.senderPayRef,
           action: "beneficiary",
           tstage: "2",
         },
@@ -124,6 +132,7 @@ module.exports = async function (req, res, next) {
         { tid: tid },
         {
           senderStatus: value.senderStatus,
+          senderPayRef: value.senderPayRef,
           action: "sender",
           tstage: "3",
         },
@@ -138,6 +147,7 @@ module.exports = async function (req, res, next) {
         { tid: tid },
         {
           senderStatus: value.senderStatus,
+          senderPayRef: value.senderPayRef,
           action: "sender",
           tstage: "2",
         },

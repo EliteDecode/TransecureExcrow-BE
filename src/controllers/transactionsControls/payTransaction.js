@@ -224,8 +224,8 @@ module.exports = async function (req, res, next) {
         });
     }
 
-    //if beneficiary and beneficary was buyer
-    if (updatedTransaction.beneficiaryEmail == demail && updatedTransaction.beneficaryRole == "buyer") {
+    //if beneficiary and beneficiary was buyer
+    if (updatedTransaction.beneficiaryEmail == demail && updatedTransaction.beneficiaryRole == "buyer") {
       await sendMail(
         updatedTransaction.beneficiaryEmail,
         "Payment Confirmation",
@@ -259,8 +259,8 @@ module.exports = async function (req, res, next) {
         });
     }
 
-    //if beneficiary and beneficary was seller
-    if (updatedTransaction.beneficiaryEmail == demail && updatedTransaction.beneficaryRole == "seller") {
+    //if beneficiary and beneficiary was seller
+    if (updatedTransaction.beneficiaryEmail == demail && updatedTransaction.beneficiaryRole == "seller") {
       await sendMail(
         updatedTransaction.beneficiaryEmail,
         "Payment Confirmation",

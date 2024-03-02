@@ -11,8 +11,8 @@ const referralCodeGenerator = require("referral-code-generator");
 const Schema = Joi.object({
   beneficiaryStatus: Joi.string().required(),
   senderStatus: Joi.string().required(),
-  beneficiaryPayRef: Joi.string().required(),
-  senderPayRef: Joi.string().required(),
+  beneficiaryPayRef: Joi.string(),
+  senderPayRef: Joi.string(),
   // email: Joi.string().email().required(),
 });
 

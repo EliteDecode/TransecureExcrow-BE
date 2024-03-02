@@ -154,145 +154,152 @@ module.exports = async function (req, res, next) {
         { returnDocument: "after" }
       );
     }
-    
-    //if sender and sender was buyer
-    if (updatedTransaction.senderEmail == demail && updatedTransaction.senderRole == "buyer") {
-      await sendMail(
-        updatedTransaction.senderEmail,
-        "Payment Confirmation",
-        `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
-          <p style="font-weight: bold;">Your payment for transaction id:  ${tid} was successful and has been confirmed.</p>
-        </div>`
-      )
-        .then(async () => {
-          await sendMail(
-            updatedTransaction.beneficiaryEmail,
-            "Payment Confirmation",
-            `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
-              <p style="font-weight: bold;">The Buyer's payment for transaction id: ${tid} has been confirmed.</p>
-            </div>`
-          )
-            .then(() => {
-              return res.status(200).json({
-                status: "success",
-                data: updatedTransaction?.tstage,
-                response: updatedTransaction,
-              });
-            })
-            .catch((error) => {
-              deleteToken();
-              res.status(400).json("Payment Confirmation Email could not be sent");
-            });
-        })
-        .catch((error) => {
-          deleteToken();
-          res.status(400).json("Payment Confirmation Email could not be sent");
-        });
-    }
-    //if sender and sender was seller
-    if (updatedTransaction.senderEmail == demail && updatedTransaction.senderRole == "seller") {
-      await sendMail(
-        updatedTransaction.senderEmail,
-        "Payment Confirmation",
-        `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
-          <p style="font-weight: bold;">Your payment for transaction id:  ${tid} was successful and has been confirmed.</p>
-        </div>`
-      )
-        .then(async () => {
-          await sendMail(
-            updatedTransaction.beneficiaryEmail,
-            "Payment Confirmation",
-            `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
-              <p style="font-weight: bold;">The Seller's payment for transaction id: ${tid} has been confirmed.</p>
-            </div>`
-          )
-            .then(() => {
-              return res.status(200).json({
-                status: "success",
-                data: updatedTransaction?.tstage,
-                response: updatedTransaction,
-              });
-            })
-            .catch((error) => {
-              deleteToken();
-              res.status(400).json("Payment Confirmation Email could not be sent");
-            });
-        })
-        .catch((error) => {
-          deleteToken();
-          res.status(400).json("Payment Confirmation Email could not be sent");
-        });
+    if (updatedTransaction != "") {
+      return res.status(200).json({
+        status: "success",
+        data: updatedTransaction?.tstage,
+        response: updatedTransaction,
+      });
     }
 
-    //if beneficiary and beneficiary was buyer
-    if (updatedTransaction.beneficiaryEmail == demail && updatedTransaction.beneficiaryRole == "buyer") {
-      await sendMail(
-        updatedTransaction.beneficiaryEmail,
-        "Payment Confirmation",
-        `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
-          <p style="font-weight: bold;">Your payment for transaction id:  ${tid} was successful and has been confirmed.</p>
-        </div>`
-      )
-        .then(async () => {
-          await sendMail(
-            updatedTransaction.senderEmail,
-            "Payment Confirmation",
-            `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
-              <p style="font-weight: bold;">The Buyer's payment for transaction id: ${tid} has been confirmed.</p>
-            </div>`
-          )
-            .then(() => {
-              return res.status(200).json({
-                status: "success",
-                data: updatedTransaction?.tstage,
-                response: updatedTransaction,
-              });
-            })
-            .catch((error) => {
-              deleteToken();
-              res.status(400).json("Payment Confirmation Email could not be sent");
-            });
-        })
-        .catch((error) => {
-          deleteToken();
-          res.status(400).json("Payment Confirmation Email could not be sent");
-        });
-    }
+    // //if sender and sender was buyer
+    // if (updatedTransaction.senderEmail == demail && updatedTransaction.senderRole == "buyer") {
+    //   await sendMail(
+    //     updatedTransaction.senderEmail,
+    //     "Payment Confirmation",
+    //     `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
+    //       <p style="font-weight: bold;">Your payment for transaction id:  ${tid} was successful and has been confirmed.</p>
+    //     </div>`
+    //   )
+    //     .then(async () => {
+    //       await sendMail(
+    //         updatedTransaction.beneficiaryEmail,
+    //         "Payment Confirmation",
+    //         `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
+    //           <p style="font-weight: bold;">The Buyer's payment for transaction id: ${tid} has been confirmed.</p>
+    //         </div>`
+    //       )
+    //         .then(() => {
+    //           return res.status(200).json({
+    //             status: "success",
+    //             data: updatedTransaction?.tstage,
+    //             response: updatedTransaction,
+    //           });
+    //         })
+    //         .catch((error) => {
+    //           deleteToken();
+    //           res.status(400).json("Payment Confirmation Email could not be sent");
+    //         });
+    //     })
+    //     .catch((error) => {
+    //       deleteToken();
+    //       res.status(400).json("Payment Confirmation Email could not be sent");
+    //     });
+    // }
+    // //if sender and sender was seller
+    // if (updatedTransaction.senderEmail == demail && updatedTransaction.senderRole == "seller") {
+    //   await sendMail(
+    //     updatedTransaction.senderEmail,
+    //     "Payment Confirmation",
+    //     `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
+    //       <p style="font-weight: bold;">Your payment for transaction id:  ${tid} was successful and has been confirmed.</p>
+    //     </div>`
+    //   )
+    //     .then(async () => {
+    //       await sendMail(
+    //         updatedTransaction.beneficiaryEmail,
+    //         "Payment Confirmation",
+    //         `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
+    //           <p style="font-weight: bold;">The Seller's payment for transaction id: ${tid} has been confirmed.</p>
+    //         </div>`
+    //       )
+    //         .then(() => {
+    //           return res.status(200).json({
+    //             status: "success",
+    //             data: updatedTransaction?.tstage,
+    //             response: updatedTransaction,
+    //           });
+    //         })
+    //         .catch((error) => {
+    //           deleteToken();
+    //           res.status(400).json("Payment Confirmation Email could not be sent");
+    //         });
+    //     })
+    //     .catch((error) => {
+    //       deleteToken();
+    //       res.status(400).json("Payment Confirmation Email could not be sent");
+    //     });
+    // }
 
-    //if beneficiary and beneficiary was seller
-    if (updatedTransaction.beneficiaryEmail == demail && updatedTransaction.beneficiaryRole == "seller") {
-      await sendMail(
-        updatedTransaction.beneficiaryEmail,
-        "Payment Confirmation",
-        `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
-          <p style="font-weight: bold;">Your payment for transaction id:  ${tid} was successful and has been confirmed.</p>
-        </div>`
-      )
-        .then(async () => {
-          await sendMail(
-            updatedTransaction.senderEmail,
-            "Payment Confirmation",
-            `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
-              <p style="font-weight: bold;">The Seller's payment for transaction id: ${tid} has been confirmed.</p>
-            </div>`
-          )
-            .then(() => {
-              return res.status(200).json({
-                status: "success",
-                data: updatedTransaction?.tstage,
-                response: updatedTransaction,
-              });
-            })
-            .catch((error) => {
-              deleteToken();
-              res.status(400).json("Payment Confirmation Email could not be sent");
-            });
-        })
-        .catch((error) => {
-          deleteToken();
-          res.status(400).json("Payment Confirmation Email could not be sent");
-        });
-    }
+    // //if beneficiary and beneficiary was buyer
+    // if (updatedTransaction.beneficiaryEmail == demail && updatedTransaction.beneficiaryRole == "buyer") {
+    //   await sendMail(
+    //     updatedTransaction.beneficiaryEmail,
+    //     "Payment Confirmation",
+    //     `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
+    //       <p style="font-weight: bold;">Your payment for transaction id:  ${tid} was successful and has been confirmed.</p>
+    //     </div>`
+    //   )
+    //     .then(async () => {
+    //       await sendMail(
+    //         updatedTransaction.senderEmail,
+    //         "Payment Confirmation",
+    //         `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
+    //           <p style="font-weight: bold;">The Buyer's payment for transaction id: ${tid} has been confirmed.</p>
+    //         </div>`
+    //       )
+    //         .then(() => {
+    //           return res.status(200).json({
+    //             status: "success",
+    //             data: updatedTransaction?.tstage,
+    //             response: updatedTransaction,
+    //           });
+    //         })
+    //         .catch((error) => {
+    //           deleteToken();
+    //           res.status(400).json("Payment Confirmation Email could not be sent");
+    //         });
+    //     })
+    //     .catch((error) => {
+    //       deleteToken();
+    //       res.status(400).json("Payment Confirmation Email could not be sent");
+    //     });
+    // }
+
+    // //if beneficiary and beneficiary was seller
+    // if (updatedTransaction.beneficiaryEmail == demail && updatedTransaction.beneficiaryRole == "seller") {
+    //   await sendMail(
+    //     updatedTransaction.beneficiaryEmail,
+    //     "Payment Confirmation",
+    //     `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
+    //       <p style="font-weight: bold;">Your payment for transaction id:  ${tid} was successful and has been confirmed.</p>
+    //     </div>`
+    //   )
+    //     .then(async () => {
+    //       await sendMail(
+    //         updatedTransaction.senderEmail,
+    //         "Payment Confirmation",
+    //         `<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; border: 1px solid #ddd;">
+    //           <p style="font-weight: bold;">The Seller's payment for transaction id: ${tid} has been confirmed.</p>
+    //         </div>`
+    //       )
+    //         .then(() => {
+    //           return res.status(200).json({
+    //             status: "success",
+    //             data: updatedTransaction?.tstage,
+    //             response: updatedTransaction,
+    //           });
+    //         })
+    //         .catch((error) => {
+    //           deleteToken();
+    //           res.status(400).json("Payment Confirmation Email could not be sent");
+    //         });
+    //     })
+    //     .catch((error) => {
+    //       deleteToken();
+    //       res.status(400).json("Payment Confirmation Email could not be sent");
+    //     });
+    // }
   } catch (error) {
     next(error);
   }

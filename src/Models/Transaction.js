@@ -49,7 +49,7 @@ const TransactionSchema = new Schema(
     },
     senderPhone: {
       type: Number,
-      required: true,
+
       default: "",
     },
     senderRole: {

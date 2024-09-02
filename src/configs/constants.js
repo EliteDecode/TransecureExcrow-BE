@@ -1,6 +1,7 @@
 module.exports = {
   mongoURI:
-    "mongodb+srv://transecureescrow:im2xDZeHLhTtn9q1@transecureescrow.skqkvf0.mongodb.net/?retryWrites=true&w=majority",
+    " mongodb+srv://elitede_code:KbRM4tNsJ9VpwkT@cluster0.qabrcuc.mongodb.net/transecureescrow?retryWrites=true&w=majority",
+
   CLOUDINARY_KEY: "896417785171519",
   CLOUDINARY_SECRET: "zzl7meqXOj-z5hVnHAMXbu4k5W4",
   CLOUDINARY_NAME: "dodkfqmfy",

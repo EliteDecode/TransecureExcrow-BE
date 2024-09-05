@@ -49,7 +49,8 @@ module.exports = async function (req, res, next) {
     } else {
       dtid = 3;
     }
-    value.tid = "trs" + new Date().getFullYear() + dtid;
+    const randomNumbers = Math.floor(1000 + Math.random() * 9000);
+    value.tid = "trs" + new Date().getFullYear() + randomNumbers;
     const transaction = await Transaction.create({ ...value });
 
     if (transaction) {
